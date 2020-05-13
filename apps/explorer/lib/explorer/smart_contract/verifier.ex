@@ -78,11 +78,11 @@ defmodule Explorer.SmartContract.Verifier do
        ) do
     generated_bytecode = extract_bytecode(bytecode)
 
-    "0x" <> blockchain_bytecode =
+    "0x" <> blockchain_created_tx_input =
       address_hash
-      |> Chain.smart_contract_bytecode()
+      |> Chain.smart_contract_creation_tx_bytecode()
 
-    blockchain_bytecode_without_whisper = extract_bytecode(blockchain_bytecode)
+    blockchain_bytecode_without_whisper = extract_bytecode(blockchain_created_tx_input)
     empty_constructor_arguments = arguments_data == "" or arguments_data == nil
 
     cond do

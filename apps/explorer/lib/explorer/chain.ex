@@ -2716,6 +2716,19 @@ defmodule Explorer.Chain do
     |> Data.to_string()
   end
 
+  def smart_contract_creation_tx_bytecode(address_hash) do
+    query =
+      from(
+        tx in Transaction,
+        where: tx.created_contract_address_hash == ^address_hash,
+        select: tx.input
+      )
+
+    query
+    |> Repo.one()
+    |> Data.to_string()
+  end
+
   @doc """
   Checks if an address is a contract
   """
